@@ -69,6 +69,28 @@ public class DirectedGraphUnitTest {
     }
 
     @Test
+    public void shouldHaveDeadLeafInPath() {
+        //given
+        final Vertex<String> a = Vertex.<String>builder().id("a").build();
+        final Vertex<String> b = Vertex.<String>builder().id("b").build();
+        final Vertex<String> c = Vertex.<String>builder().id("c").build();
+        final Vertex<String> d = Vertex.<String>builder().id("d").build();
+        graph.addVertex(a);
+        graph.addVertex(b);
+        graph.addVertex(c);
+        graph.addVertex(d);
+        graph.addEdge(a, b);
+        graph.addEdge(a, c);
+        graph.addEdge(c, d);
+
+        //when
+        final Set<Vertex> path = graph.getPath(a, d);
+
+        //then
+        assertThat(path, contains(a, c, d));
+    }
+
+    @Test
     public void shouldBuildPathWithLoopEdges() {
         //given
         final Vertex<String> a = Vertex.<String>builder().id("a").build();

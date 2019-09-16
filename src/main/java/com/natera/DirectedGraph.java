@@ -40,6 +40,7 @@ public class DirectedGraph<T> implements Graph<T>{
     }
 
     private boolean process(Vertex<T> origin, Vertex<T> destination, Set<String> visitedIds, Set<Vertex> path) {
+        boolean hasLink = false;
         for (Vertex<T> linkedVertex : origin.getEdges()) {
             final boolean notVisited = !visitedIds.contains(linkedVertex.getId());
             if (notVisited) {
@@ -48,14 +49,13 @@ public class DirectedGraph<T> implements Graph<T>{
                 if (linkedVertex.equals(destination)) {
                     return true;
                 } else {
-                    final boolean hasLink = process(linkedVertex, destination, visitedIds, path);
+                    hasLink = process(linkedVertex, destination, visitedIds, path);
                     if (!hasLink) {
                         path.remove(linkedVertex);
                     }
-                    return hasLink;
                 }
             }
         }
-        return false;
+        return hasLink;
     }
 }
