@@ -4,11 +4,11 @@ import com.natera.domain.Vertex;
 
 import java.util.Set;
 
-public interface Graph {
+public interface Graph<T> {
 
-    void addVertex(Vertex vertex);
+    void addVertex(Vertex<T> vertex);
 
-    void addEdge(Vertex vertex1, Vertex vertex2);
+    void addEdge(Vertex<T> vertex1, Vertex<T> vertex2);
 
-    Set<Vertex> getPath(Vertex from, Vertex to);
+    Set<Vertex> getPath(Vertex<T> from, Vertex<T> to);
 }

@@ -10,13 +10,15 @@ import java.util.stream.Collectors;
 
 @Getter
 @EqualsAndHashCode(of = "id")
-public class Vertex {
+public class Vertex<T> {
     private String id;
-    private Set<Vertex> edges;
+    private Set<Vertex<T>> edges;
+    private T data;
 
     @Builder
-    public Vertex(String id, Object data) {
+    public Vertex(String id, T data) {
         this.id = id;
+        this.data = data;
         this.edges = new HashSet<>();
     }
 

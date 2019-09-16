@@ -8,27 +8,27 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class DirectedGraph implements Graph {
-    final HashMap<String, Vertex> graph;
+public class DirectedGraph<T> implements Graph<T>{
+    final HashMap<String, Vertex<T>> graph;
 
     public DirectedGraph() {
         this.graph = new HashMap<>();
     }
 
     @Override
-    public void addVertex(Vertex vertex) {
+    public void addVertex(Vertex<T> vertex) {
         graph.put(vertex.getId(), vertex);
     }
 
     @Override
-    public void addEdge(Vertex from, Vertex to) {
+    public void addEdge(Vertex<T> from, Vertex<T> to) {
         if (graph.containsKey(from.getId()) && graph.containsKey(to.getId())) {
             from.getEdges().add(to);
         }
     }
 
     @Override
-    public Set<Vertex> getPath(Vertex from, Vertex to) {
+    public Set<Vertex> getPath(Vertex<T> from, Vertex<T> to) {
         final HashSet<String> visitedIds = new HashSet<>();
         final Set<Vertex> path = new LinkedHashSet<>();
         visitedIds.add(from.getId());
@@ -39,8 +39,8 @@ public class DirectedGraph implements Graph {
         return Collections.emptySet();
     }
 
-    private boolean process(Vertex origin, Vertex destination, Set<String> visitedIds, Set<Vertex> path) {
-        for (Vertex linkedVertex : origin.getEdges()) {
+    private boolean process(Vertex<T> origin, Vertex<T> destination, Set<String> visitedIds, Set<Vertex> path) {
+        for (Vertex<T> linkedVertex : origin.getEdges()) {
             final boolean notVisited = !visitedIds.contains(linkedVertex.getId());
             if (notVisited) {
                 visitedIds.add(linkedVertex.getId());
