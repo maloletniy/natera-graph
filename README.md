@@ -11,7 +11,7 @@ Questions to be ready to answer (don’t have to implement):
   - Add traverse function that will take a user defined function and apply it on every vertex of the graph.
   - Make you graphs thread safe.
   
-#Description
+# Description
 Graph allows to store Vertexes. 
 It's possible to store user defined data in Vertex.data field 
 
